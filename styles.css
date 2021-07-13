@@ -1,0 +1,44 @@
+body{
+background-color:#187bcd;
+
+}
+
+.questions{
+	background-color:#2a9df4;
+	font-size: 25px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.answer-box{
+  display: grid;
+  font-size: 20px;
+  grid-template-columns: auto auto auto auto;
+  background-color:#d0efff;
+  padding: 10px;
+	}
+
+.options{
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid rgba(0, 0, 0, 0.8);
+	padding: 10px;
+	font-size: auto;
+	text-align: center;
+}
+.hat{
+font-size: 50px;
+color: white;
+}
+
+.button-style{
+	background-color:blue;
+	color:white;
+	height:100px;
+	width:200px;
+	border-radius:10px;
+}
+.button-style:hover{
+	box-shadow: 2px 2px;
+	background-color:white;
+	color:blue;
+	border-radius:10px;
+}
