@@ -8,8 +8,9 @@ $PASSWORD_U=mysqli_real_escape_string($db,$_GET['pass']);
 $IDENTITY=mysqli_real_escape_string($db,$_GET['Id']);
 
 $TID = mysqli_real_escape_string($db,$_GET['testid']);
-
-
+echo"<link rel=\"Stylesheet\" href=\"./css/homepage.css\">";
+echo"<script src=\"./js/toogle_pswd.js\"></script>";
+echo"<script src=\"./js/check_empty.js\"></script>";
 echo"<head><title>WELCOME</title></head>";
 $PASSWORD = md5($PASSWORD_U);
 
@@ -19,7 +20,11 @@ $que96=mysqli_query($db,$query96);
 
 $q96=mysqli_fetch_array($que96);
 
+$query9 = "SELECT * FROM login WHERE USERNAME='$USERNAME'";
 
+$que9=mysqli_query($db,$query9);
+
+$q9=mysqli_fetch_array($que9);
 
 $aabbcc = $q96["AdminName"];
 
@@ -37,42 +42,39 @@ if($IDENTITY==$q96["Code"]){
     }
     }
     return $randomString;
-}
+    }
 
 	//SIGNUP AREA
 
-$query9 = "select * from login where USERNAME='$USERNAME' and PASSWORD='$PASSWORD'";
 
-$que9=mysqli_query($db,$query9);
 
-$q9=mysqli_fetch_array($que9);
-
-if($USERNAME!==$q9["USERNAME"]){
+if($USERNAME!=$q9["USERNAME"]){
 //SUCCESSFUL SIGNUP
-
+    echo" ".$q9["USERNAME"];
 	$propwd = generateRandomString(49);
 
-$query3="INSERT INTO login(USERNAME,profilepwd,PASSWORD,TYPE,ADMINNAME) VALUES('$USERNAME','$propwd','$PASSWORD','USER','$aabbcc')";
+    $query3="INSERT INTO login(USERNAME,profilepwd,PASSWORD,TYPE,ADMINNAME) VALUES('$USERNAME','$propwd','$PASSWORD','USER','$aabbcc')";
 
-$q3=mysqli_query($db,$query3);
+    $q3=mysqli_query($db,$query3);
 
-echo"<H1>SIGNUP SUCCESS</H1>";
+    echo"<H1>SIGNUP SUCCESS<br></H1>";
+    echo"<h2><a href=\"./login.htm\">Goto login page to login</a></h2>";
 
 }else{
 //FAILED SIGNUP
-echo"Account already present please login";
+echo"<CENTER><H1><U>Account already present please login</U></H1></CENTER>";
 
 }
 
-}else if($IDENTITY==="ADMIN9733817"){
+}else if($IDENTITY==="ADMIN9733817"&&$USERNAME!=$q9["USERNAME"]){
 
 	//ADMIN SIGNUP AREA
+    echo"OP: ".$q9["USERNAME"];
+    $query3="INSERT INTO login(USERNAME,PASSWORD,TYPE) VALUES ('$USERNAME','$PASSWORD','ADMIN')";
 
-$query3="INSERT INTO login(USERNAME,PASSWORD,TYPE) VALUES ('$USERNAME','$PASSWORD','ADMIN')";
+    $q3=mysqli_query($db,$query3);
 
-$q3=mysqli_query($db,$query3);
-
-echo"SIGNUP SUCCESS";
+    echo"SIGNUP SUCCESS";
 
 
 
@@ -90,32 +92,25 @@ echo"<script data-ad-client=\"ca-pub-3187147864873704\" async src=\"https://page
 
 if($q["USERNAME"]==$USERNAME && $q["PASSWORD"]==$PASSWORD ){
 //LOGIN INITAILSATION
-echo"<CENTER><H1>LOGIN SUCCESS, WELCOME $USERNAME</H1><br>
-<h7>Please make a note of your profile pwd in case you need to change password</h7>
-</CENTER>";
-
-echo"<body background='images.jpg' ></body>";
-$ppwd = $q["profilepwd"];
-echo"<center><BR><BR><input type=\"password\" value=\"$ppwd\" id=\"account-confidential\">";
-
-echo"<button onclick=\"toogleData()\">Toggle view of profile-pwd</button></center>";
-
-echo"<script>
-function toogleData(){
-var x = document.getElementById(\"account-confidential\").type;
-if(x==\"password\"){
-document.getElementById(\"account-confidential\").type = \"text\";
-    }else{
-    document.getElementById(\"account-confidential\").type=\"password\";
-        }
-}
-</script>";
-
+    echo"<div class=\"container\">";
+    echo"<div class=\"heading\">";
+    echo"<CENTER><H1>LOGIN SUCCESS, WELCOME $USERNAME</H1><br></CENTER>";
+    echo"</div>";
+    echo"<body class=\"body\"></body>";
+    echo"<div class=\"bg-image\"></div>";
 
 if( $q["TYPE"]=="USER"){
 //USER LOGIN
-echo"<CENTER><H1>GOOD TO GO</CENTER></H1>";
+echo"<div class=\"side\">";
+echo"<h7>Please make a note of your profile pwd in case you need to change password</h7>";
 
+
+$ppwd = $q["profilepwd"];
+
+echo"<div class=\"profile-pswd-container\">";
+echo"<BR>PROFILE PASSWORD: <br><input type=\"password\" value=\"$ppwd\" id=\"account-confidential\" class=\"profile-pswd\">";
+echo"<button onclick=\"toogleData()\" class=\"profile-pswd-button\">👁️</button><br>";
+echo"</div>";
 $sid=md5(rand(1,10000000000000000));
 
 $query2="INSERT INTO sessions(SESSION,USERNAME,IDENTITY,password) VALUES('$sid','$USERNAME','$IDENTITY','$PASSWORD_U')";
@@ -124,27 +119,31 @@ $q2=mysqli_query($db,$query2);
 
 setcookie("SESSIONid",$sid);
 
-echo"<FORM ACTION=\"quiz.php\" TYPE=\"POST\" ALIGN=\"CENTER\">";
 
-echo"TEST ID:<INPUT TYPE=\"TEXT\" NAME=\"tid\" value =".$TID." ><BR><BR>";
+echo"<div class=\"form\">";
+echo"<FORM ACTION=\"quiz.php\" TYPE=\"POST\">";
 
-echo"<INPUT TYPE=\"HIDDEN\" NAME=\"U\" VALUE=".$USERNAME." readonly><BR><BR>";
+echo"TEST ID: <INPUT TYPE=\"TEXT\" NAME=\"tid\" value =".$TID." ><br>";
 
-echo"<INPUT TYPE=\"HIDDEN\" NAME=\"sd\" VALUE=".$sid." readonly><BR><BR>";
+echo"USERNAME: <INPUT TYPE=\"TEXT\" NAME=\"U\" VALUE=".$USERNAME." readonly><br>";
+
+echo"<INPUT TYPE=\"HIDDEN\" NAME=\"sd\" VALUE=".$sid." readonly><br>";
 
 echo"By continuing you accept our quiz policy and instructions.";
-
-
-
-echo"<INPUT TYPE=\"SUBMIT\" VALUE=\"LET'S GO\">";
-
+echo"<div class=\"sumbit-button-container\">";
+echo"<div class=\"sumbit-button-div\">";
+echo"<div class=\"btn-bg\"></div>";
+echo"<INPUT TYPE=\"SUBMIT\" VALUE=\"LET'S GO\" class=\"submit-button\" onClick=\"check()\">";
+echo"</div>";
+echo"</div>";
 echo"</FORM>";
-
 
 $val=$q["ADMINNAME"];
 
-echo"<MARQUEE>FOR TEST ID CONTACT YOUR ADMIN: $val </MARQUEE>";
-
+echo"FOR TEST ID CONTACT YOUR ADMIN: $val";
+echo"</div>";
+echo"</div>";
+echo"</div>";
 }
 
 else{
@@ -168,7 +167,7 @@ echo"<CENTER><H1>LOGIN FAILED</H1> </CENTER><BR>";
 
 }else{
 
-	echo"ACESS CODE NOT CORRECT: ".$IDENTITY;
+	echo"<CENTER><H1>ACCOUNT ALREADY PRESENT PLEASE LOGIN</H1></CENTER>";
 
 }
 

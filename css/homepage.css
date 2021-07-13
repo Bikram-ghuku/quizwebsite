@@ -1,0 +1,132 @@
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+  
+@font-face {
+    font-family: Poppins-Medium;
+    src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+}
+  
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+}
+  
+@font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+}
+
+.container{
+    align-items: center;
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    align-content: center;
+    word-spacing: 2px;
+    line-height: 25px;
+    font-family: Poppins-Medium;
+    justify-content: center;
+}
+
+
+
+.body{
+    align-content: stretch;
+    justify-content: right;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../images/bg-01.jpg");
+}
+
+.bg-img{
+    background-image: url("../images/bg-01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(8px);
+     -webkit-filter: blur(8px);
+
+    height: 100%;
+}
+
+.heading{
+    font-family: Poppins-Bold;
+    font-size: large;
+}
+
+.side{
+    left: 100%;
+    border-radius: 20px;
+    width: 300px;
+    color: black;
+    margin: 2%;
+    background-color: white;
+    font-weight: bold;
+    height: 400px;
+    align-content: center;
+    line-height: 25px;
+    padding-left: 15px;
+    padding-block: 25px;
+    padding-inline: 25px;
+    box-shadow: -10px 10px 5px grey;
+}
+
+
+
+.profile-pswd{
+    height: 25px;
+}
+
+.profile-pswd-button{
+    height: 25px;
+}
+
+.profile-pswd-container{
+    line-height: 10px;
+    padding-inline-start: 2%;
+}
+.form{
+    padding-top: 30px;
+    border-radius: 25px;
+    opacity: 1;
+}
+
+@media (max-width: 576px) {
+    .wrap-login100 {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  } 
+
+
+
+
+
+
+
+.submit-button{
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 90%;
+    height: 50px;
+    border-radius: 20px;
+}
+
+
+
+
+.sumbit-button-div:hover .btn-bg {
+    left: 0;
+}
