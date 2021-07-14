@@ -69,7 +69,6 @@ echo"<CENTER><H1><U>Account already present please login</U></H1></CENTER>";
 }else if($IDENTITY==="ADMIN9733817"&&$USERNAME!=$q9["USERNAME"]){
 
 	//ADMIN SIGNUP AREA
-    echo"OP: ".$q9["USERNAME"];
     $query3="INSERT INTO login(USERNAME,PASSWORD,TYPE) VALUES ('$USERNAME','$PASSWORD','ADMIN')";
 
     $q3=mysqli_query($db,$query3);
