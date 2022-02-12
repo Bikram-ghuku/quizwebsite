@@ -9,7 +9,7 @@ if(isset($_COOKIE["SESSIONid"])){
 	
 	
 $session =	$_COOKIE["SESSIONid"];
-if($session !==md5("UNKNOOWN")){
+if($session !=md5("UNKNOOWN")){
 setcookie(time,0,time()-3600);
 session_start();
 $query = "select * from sessions where SESSION = '$session'";
@@ -24,15 +24,15 @@ $p = $_COOKIE["PASSWORD"];
 }
 
 if($redirect == "maintence"){
-header("Location:Under_maintenence.htm");
+	header("Location:./Under_maintenence.htm");
 }else{
-header("Location:localhost:8080/quiz/LOGIN.php?username=".$u."&pass=".$p."&Id=LOGIN12556");
+	header("Location:./LOGIN.php?username=".$u."&pass=".$p."&Id=LOGIN12556");
 }	
 }else{
     if($redirect == "maintence"){
-header("Location:Under_maintenence.htm");
+		header("Location:./Under_maintenence.htm");
     }else{	
-header("Location:homepage.htm");	
+		header("Location:./landing.htm");	
     }	
 }
 

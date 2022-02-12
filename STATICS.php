@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 include('mysqli_connect.php');
 
 $a=mysqli_real_escape_string($db,$_GET["f"]);
@@ -75,13 +75,17 @@ $se=$s->fetch_assoc();
 if($se[$tid]=='-1000'){
 	
 $su=mysqli_query($db,"UPDATE login SET $tid = '$score' WHERE USERNAME='$u'");
+echo"<button onClick=\"print()\">Print</button>";
 }else{
 	
 echo"<HTML><H1>You have already subbmitted the quiz, So this attempt will not be uploaded</H1></HTML>";
+echo"<h1><a href=\"./login.htm\">Go to home</a></h1>";
+
 }
 setcookie("SESSIONid", "", time() - 3600);
 setcookie("mycookie", "", time() - 3600);
 $bik="DELETE FROM sessions WHERE USERNAME='$u' ";
+$bikquar=mysqli_query($db,$bik);
 }else{
 echo"<CENTER><H1>Don't resubmit the quiz, This incident has been infromed to our technical staff</H1></CENTER>";
 echo"<BODY BACKGROUND=\"img.jpg\"></BODY>";

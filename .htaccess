@@ -1,5 +1,4 @@
-
-
 RewriteEngine on
 
 RewriteRule ^/havetest([0-9a-zA-Z]+) testredirect.php?tid=$1 
+

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
+
 body{
 background-color:#187bcd;
 
@@ -25,8 +27,8 @@ background-color:#187bcd;
 	text-align: center;
 }
 .hat{
-font-size: 50px;
-color: white;
+	font-size: 50px;
+	color: white;
 }
 
 .button-style{
@@ -41,4 +43,26 @@ color: white;
 	background-color:white;
 	color:blue;
 	border-radius:10px;
+}
+
+.info_box{
+	background-color:white;
+	float: center;
+}
+
+.info_container{
+	align-items: center;
+	font-family: 'Roboto Slab', serif;
+	padding-top: 80px;
+	padding-left: 70px;
+	padding-right: 100px;
+}
+
+.header_box{
+	align-items: center;
+	justify-content: center;
+}
+.data{
+	line-height: 25px;
+	padding-top: 30px;
 }
