@@ -69,6 +69,7 @@ echo"<CENTER><H1><U>Account already present please login</U></H1></CENTER>";
 }else if($IDENTITY==="ADMIN9733817"&&$USERNAME!=$q9["USERNAME"]){
 
 	//ADMIN SIGNUP AREA
+    echo"OP: ".$q9["USERNAME"];
     $query3="INSERT INTO login(USERNAME,PASSWORD,TYPE) VALUES ('$USERNAME','$PASSWORD','ADMIN')";
 
     $q3=mysqli_query($db,$query3);
@@ -87,7 +88,6 @@ $que=mysqli_query($db,$query);
 
 $q=mysqli_fetch_array($que);
 
-echo"<script data-ad-client=\"ca-pub-3187147864873704\" async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>";
 
 if($q["USERNAME"]==$USERNAME && $q["PASSWORD"]==$PASSWORD ){
 //LOGIN INITAILSATION
@@ -107,7 +107,7 @@ echo"<h7>Please make a note of your profile pwd in case you need to change passw
 $ppwd = $q["profilepwd"];
 
 echo"<div class=\"profile-pswd-container\">";
-echo"<BR>PROFILE PASSWORD: <br><input type=\"password\" value=\"$ppwd\" id=\"account-confidential\" class=\"profile-pswd\">";
+echo"<BR>PROFILE PASSWORD: <br><input type=\"password\" value=\"$ppwd\" id=\"account-confidential\" class=\"profile-pswd\" readonly>";
 echo"<button onclick=\"toogleData()\" class=\"profile-pswd-button\">👁️</button><br>";
 echo"</div>";
 $sid=md5(rand(1,10000000000000000));
@@ -117,12 +117,13 @@ $query2="INSERT INTO sessions(SESSION,USERNAME,IDENTITY,password) VALUES('$sid',
 $q2=mysqli_query($db,$query2);
 
 setcookie("SESSIONid",$sid);
+setcookie("USER",$USERNAME);
 
 
 echo"<div class=\"form\">";
 echo"<FORM ACTION=\"quiz.php\" TYPE=\"POST\">";
 
-echo"TEST ID: <INPUT TYPE=\"TEXT\" NAME=\"tid\" value =".$TID." ><br>";
+echo"TEST ID: <INPUT TYPE=\"TEXT\" NAME=\"tid\" value =\"".$TID."\" id=\"testid\"><br>";
 
 echo"USERNAME: <INPUT TYPE=\"TEXT\" NAME=\"U\" VALUE=".$USERNAME." readonly><br>";
 
@@ -139,10 +140,35 @@ echo"</FORM>";
 
 $val=$q["ADMINNAME"];
 
-echo"FOR TEST ID CONTACT YOUR ADMIN: $val";
+echo"FOR TEST ID CONTACT YOUR PROCTER: $val";
 echo"</div>";
 echo"</div>";
 echo"</div>";
+
+//view aviable tests
+
+
+$query_avail_test = "SELECT * FROM questions2 WHERE CNAME='$val' AND a_response=1";
+$quer_avail_test_arr=mysqli_query($db,$query_avail_test);
+
+echo"<h1>Assigned tests:</H1>";
+echo"<table class=\"test_table\">";
+echo"<tr><th>Test ID</th><th>Time</th><th>Give Test</th></tr>";
+while($avail_test_arr=mysqli_fetch_array($quer_avail_test_arr)){
+
+    //UPDATE THE TIME TO READABLE FORMAT FROM DATABASE
+    if($avail_test_arr['TIME']==0){
+        $avail_test_arr['TIME']="300sec";
+    }else{
+        $avail_test_arr['TIME']=$avail_test_arr['TIME'].'SEC';
+    }
+
+    echo"<tr><td>".$avail_test_arr['Tid']."</td>";
+    echo"<td>".$avail_test_arr['TIME']."</td>";
+    echo"<td><button class=\"go_test\" onClick=\"goTest('".$avail_test_arr['Tid']."')\" >Give Test</button></td>";
+    echo"</tr>";
+}
+echo"</table></div>";
 }
 
 else{
@@ -173,3 +199,11 @@ echo"<CENTER><H1>LOGIN FAILED</H1> </CENTER><BR>";
 
 
 ?>
+<script>
+
+    function goTest(testid){
+        document.getElementById('testid').value=testid;
+        document.getElementsByTagName("form")[0].submit()
+        console.log(testid)
+    }
+</script>

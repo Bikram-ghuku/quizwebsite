@@ -62,7 +62,8 @@
 }
 
 .side{
-    left: 100%;
+    float: right;
+    /* left: 100%; */
     border-radius: 20px;
     width: 300px;
     color: black;
@@ -77,6 +78,8 @@
     padding-inline: 25px;
     box-shadow: -10px 10px 5px grey;
 }
+
+
 
 
 
@@ -105,12 +108,6 @@
     }
   } 
 
-
-
-
-
-
-
 .submit-button{
     font-family: Poppins-Medium;
     font-size: 16px;
@@ -124,9 +121,37 @@
     border-radius: 20px;
 }
 
+.test_table{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-collapse: collapse;
+    width: 59%;
+}
 
+.test_table th, .test_table td{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
 
+.test_table tr:nth-child(even){
+    background-color:#13EEF5;
+}
 
-.sumbit-button-div:hover .btn-bg {
-    left: 0;
+.test_table tr:nth-child(even):hover{
+    background-color:#5CD0D4;
+}
+
+.test_table tr:nth-child(odd){
+    background-color:#ddd;
+}
+
+.test_table tr:nth-child(odd):hover{
+    background-color:#C1BABA;
+}
+
+.test_table th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color:#1A59EB;
+    color: white;
 }
