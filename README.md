@@ -1,6 +1,6 @@
 <h1> Open source quiz platform</h1>
 
-![Github Top Language](https://img.shields.io/github/languages/top/Bikram-ghuku/quizwebsite) \n
+![Github Top Language](https://img.shields.io/github/languages/top/Bikram-ghuku/quizwebsite)
 ![Github release](https://img.shields.io/github/v/release/Bikram-ghuku/quizwebsite)
 
 <h4>Blank Quiz interface image</h4>
